@@ -58,5 +58,20 @@
 
 // filterwithoutstring(arr);
 
-
 // 5. Guess output to understand synchronous vs asynchronous
+
+var arr = [];
+
+for (var i = 0; i < 10; i++) {
+	arr.push(function () {
+		setTimeout(function () {
+			console.log(i);
+		}, 1000);
+	});
+}
+
+for (var i = 0; i < 10; i++) {
+	arr[i]();
+}
+
+// 10 times 10 print hoga
