@@ -4,6 +4,6 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <div className='text-red-500'>Hi</div>
   </StrictMode>,
 )
