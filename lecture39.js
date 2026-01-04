@@ -41,7 +41,7 @@
 //     }
 //     console.log(sum);
 // }
-// addUnlimited(3, 5, 6, 8)
+// addUnlimited(3, 5, 6, 8,2895298)
 
 // function addUnlimited(...args) {
 //     let sum = 0
