@@ -448,8 +448,6 @@
 //     }
 // };
 
-// Testing staging branch
-
 // console.log(laptop);
 // laptop.start();
 // laptop.increasePrice();
@@ -464,9 +462,28 @@
 // 	4.	Create a class named Employee that stores:
 // name
 // salary
-
 // Add a method showDetails that prints name and salary.
 // 	5.	Create three employee objects from the same class and verify that modifying one employee does not affect the others.
+
+// class Employee {
+//     constructor(name, salary) {
+//         this.name = name;
+//         this.salary = salary;
+//     }
+
+//     showDetails = function() {
+//         console.log(`${this.name} earns ${this.salary} as a salary`);
+//     };
+// }
+
+// let E1 = new Employee('Akash', 800);
+// let E2 = new Employee('Rahul', 200);
+// let E3 = new Employee('Raj', 500);
+
+// E1.showDetails();
+// E2.showDetails();
+// E3.showDetails();
+
 // 	6.	Explain in your own words:
 // Why is class considered a better option than writing similar objects again and again?
 
@@ -480,6 +497,25 @@
 // 	10.	Create two bank accounts and deposit money into only one.
 // Observe and explain why the second account is not affected.
 
+// class BankAccount {
+//     constructor(accountHolderName, balance) {
+//         this.accountHolderName = accountHolderName;
+//         this.balance = balance;
+//     }
+
+//     deposit(amount) {
+//         this.balance += amount;
+//     };
+// }
+
+// let b1 = new BankAccount('Suraj', 0);
+// let b2 = new BankAccount('Tarun', 0);
+
+// b2.deposit(500);
+
+// console.log(b1);
+// console.log(b2);
+
 // ⸻
 
 // SECTION 4: Understanding this (Very Important)
@@ -489,6 +525,21 @@
 // Observe what happens to this and explain why.
 // 	14.	Modify the code so that this works correctly again.
 
+// let profile = {
+//     username: 'jagan',
+//     printName: function() {
+//         console.log(this.username);
+//     }
+// };
+
+// profile.printName();
+// let printNameFunction = profile.printName;
+// printNameFunction(); //undeifined
+// printNameFunction.call(profile); //jagan
+// printNameFunction.apply(profile);    //jagan
+// let fun = printNameFunction.bind(profile);
+// fun();  //jagan
+
 // ⸻
 
 // SECTION 5: Constructor Function and Prototype
@@ -497,26 +548,100 @@
 // 	17.	Move the same method to Vehicle.prototype and repeat the test.
 // 	18.	Explain why the prototype approach is preferred.
 
+// Reset – clean constructor
+// function Vehicle(type, wheels) {
+//     this.type = type;
+//     this.wheels = wheels;
+// }
+
+// // 17. Add method to prototype (shared by all instances)
+// Vehicle.prototype.describe = function() {
+//     console.log(`This is a ${this.type} with ${this.wheels} wheels.`);
+// };
+
+// // Create instances again
+// const car2   = new Vehicle("Car", 4);
+// const bike2  = new Vehicle("Bike", 2);
+// const truck2 = new Vehicle("Truck", 6);
+
+// car2.describe();   // This is a Car with 4 wheels.
+// bike2.describe();  // This is a Bike with 2 wheels.
+
+// // Memory check – now it's perfect!
+// console.log(car2.describe === bike2.describe);     // true
+// console.log(car2.describe === truck2.describe);    // true
+
+// // → All instances share THE SAME function reference
+// // → Very memory efficient!
+
 // ⸻
 
 // SECTION 6: call Method Practice
-// 	19.	Create a function showBrand that prints this.brand.
-// 	20.	Create two different objects with brand values.
-// 	21.	Use call to execute showBrand for both objects.
+// 19. Create the function showBrand
+// function showBrand() {
+//     console.log("Brand:", this.brand);
+// }
+
+// // 20. Create two different objects with brand property
+// const car = {
+//     brand: "Toyota",
+//     model: "Corolla"
+// };
+
+// const bike = {
+//     brand: "Honda",
+//     type: "CBR"
+// };
+
+// // 21. Use call to execute showBrand for both objects
+// showBrand.call(car);   // this → car
+// // Output: Brand: Toyota
+
+// showBrand.call(bike);  // this → bike
+// // Output: Brand: Honda
 // 	22.	Explain what problem call is solving here.
 
 // ⸻
 
 // SECTION 7: apply Method Practice
-// 	23.	Create a function introduce that accepts two arguments: city and role, and prints name, city, and role using this.name.
-// 	24.	Create an object with a name property.
-// 	25.	Use apply to call introduce using the object and an array of arguments.
+// // 23. Create function introduce that uses this.name + two parameters
+// function introduce(city, role) {
+//     console.log(`Hi, I'm ${this.name} from ${city} and I work as a ${role}.`);
+// }
+
+// // 24. Create an object with name property
+// const person = {
+//     name: "Harshal"
+// };
+
+// // 25. Use apply to call introduce with array of arguments
+// const args = ["Pune", "Software Developer"];
+
+// introduce.apply(person, args);
+// // Output:
+// // Hi, I'm Harshal from Pune and I work as a Software Developer.
 // 	26.	Explain in simple words how apply differs from call.
 
 // ⸻
 
 // SECTION 8: bind Method Practice
-// 	27.	Create a function greet that prints “Hello” followed by this.name.
-// 	28.	Bind this function to an object and store the returned function in a variable.
-// 	29.	Call the bound function later and observe the output.
+// 27. Create function greet that uses this.name
+// function greet() {
+//     console.log(`Hello, ${this.name}!`);
+// }
+
+// // 28. Create an object and bind the function to it
+// const person = {
+//     name: "Harshal"
+// };
+
+// const boundGreet = greet.bind(person);
+// // boundGreet is now a new function where `this` is permanently set to person
+// // 29. Call the bound function (can be called anytime, anywhere)
+// boundGreet();  
+// // Output: Hello, Harshal!
+
+// // You can even call it much later or pass it around
+// setTimeout(boundGreet, 2000);  
+// // After 2 seconds → Hello, Harshal!
 // 	30.	Explain why bind is useful when functions are executed later or inside callbacks.
