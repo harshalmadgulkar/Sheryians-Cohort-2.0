@@ -435,6 +435,24 @@
 // SECTION 1: OOPS Thinking with Objects
 // 	1.	Create an object called laptop that contains brand, price, and a start method that prints “Laptop started”.
 // 	2.	Add one more method to the same object that increases the price by 10 percent.
+
+let laptop = {
+    brand: 'Lenovo',
+    price: 200,
+    start: function() {
+        console.log("Laptop started");
+    },
+    increasePrice: function() {
+        let amountToBeIncreased = this.price * 10 / 100;
+        this.price = this.price + amountToBeIncreased;
+    }
+};
+
+console.log(laptop);
+laptop.start();
+laptop.increasePrice();
+console.log(laptop);
+
 // 	3.	Now imagine you need 10 laptops with same structure but different data.
 // Write down (in words or code) what problems you will face if you keep using plain objects.
 
