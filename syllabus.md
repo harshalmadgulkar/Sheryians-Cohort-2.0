@@ -231,7 +231,7 @@
 
 * Introduction to Asynchrony in JavaScript. ✅(lecture59 .js)
 * Introduction to `callbacks` and Problems in Callbacks ✅(lecture59 .js & lecture60 .js)
-* Understanding `promises` - `pending` , `resolved` , `rejected`
+* Understanding `promises` - `pending` , `resolved` , `rejected ✅(lecture61 .js)`
 * How to prevent callback hell using `async` & `await` .
 * `setInterval` & `setTimeout` in JavaScript
 
