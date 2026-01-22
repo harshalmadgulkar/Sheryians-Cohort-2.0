@@ -247,7 +247,7 @@
 
 ### 21. Kuch Baatein Advance JavaScript Pr ⚙️
 
-* Throttling and Debouncing uses in JavaScript
+* Throttling and Debouncing uses in JavaScript ✅(lecture64.js)
 * JSON Handeling and JavaScript - \[`JSON.parse()` , `JSON.stringify()`\]
 
 ### 22. Git and Github
