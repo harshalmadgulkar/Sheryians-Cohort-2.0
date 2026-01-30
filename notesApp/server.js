@@ -1,4 +1,10 @@
+import dotenv from 'dotenv';
 import app from './src/app.js';
+import connectDB from './src/config/database.js';
+
+dotenv.config();
+
+connectDB();
 
 app.listen(3000, () => {
     console.log("NotesApp running on port:3000");
