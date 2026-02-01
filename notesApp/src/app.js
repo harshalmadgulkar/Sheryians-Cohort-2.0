@@ -30,17 +30,23 @@ app.post('/notes/create', async (req, res) => {
     });
 });
 
-app.patch('/notes/update/:index', (req, res) => {
-    let { index } = req.params;
+// update note
+app.patch('/notes/update/:id', async (req, res) => {
+    let { id } = req.params;
     let { description } = req.body;
-    notes[index].description = description;
+    await noteModel.findOneAndUpdate({ _id: id }, { description });
     res.status(200).json({ message: "note updated successfully." });
 });
 
-app.delete('/notes/delete/:index', (req, res) => {
-    const { index } = req.params;
-    delete notes[index];
-    res.status(200).json({ message: "note deleted succesfully" });
+// delete single note
+app.delete('/notes/delete/:id', async (req, res) => {
+    const { id } = req.params;
+    const note = await noteModel.findOneAndDelete({ _id: id });
+
+    res.status(200).json({
+        message: "note deleted succesfully",
+        note
+    });
 });
 
 export default app;
