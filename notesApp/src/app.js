@@ -9,15 +9,6 @@ app.get('/', (req, res) => {
     res.send("NotesApp Server");
 });
 
-app.get('/notes/read', async (req, res) => {
-    // find all notes from db
-    const notes = await noteModel.find();
-    res.status(200).json({
-        message: "Notes fetched succesfully",
-        notes
-    });
-});
-
 app.post('/notes/create', async (req, res) => {
     // destructure title and description
     let { title, description } = req.body;
@@ -27,6 +18,15 @@ app.post('/notes/create', async (req, res) => {
     res.status(201).json({
         message: "note created successfully.",
         note
+    });
+});
+
+app.get('/notes/read', async (req, res) => {
+    // find all notes from db
+    const notes = await noteModel.find();
+    res.status(200).json({
+        message: "Notes fetched succesfully",
+        notes
     });
 });
 
