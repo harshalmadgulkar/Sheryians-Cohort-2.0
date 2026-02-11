@@ -1,4 +1,4 @@
-// ! Pracctice sheet  for Raja Software Labs
+// ! Practice sheet  for Raja Software Labs
 
 // ! Q.1 Write a program to find the angle between the hour and minute hands of a clock, given the time as input. The expected output is the angle in degrees.
 
