@@ -12,7 +12,7 @@ authRouter.post('/register', async (req, res) => {
         const isUserAlreadyExists = await userModel.findOne({ email });
 
         if (isUserAlreadyExists) {
-            return res.status(400).json({
+            return res.status(409).json({
                 message: "User already exists"
             });
         }
@@ -21,7 +21,7 @@ authRouter.post('/register', async (req, res) => {
 
         const user = await userModel.create({ email, name, password: hashedPassword });
 
-        const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         res.cookie("jwt_token", token);
 
@@ -53,7 +53,7 @@ authRouter.post('/login', async (req, res) => {
         });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
     res.cookie("jwt_token", token);
 
     res.status(200).json({
@@ -62,6 +62,17 @@ authRouter.post('/login', async (req, res) => {
         token
     });
 
+});
+
+authRouter.post('/getme', async (req, res) => {
+    const token = req.cookies.jwt_token;
+    console.log(token);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.id);
+    res.status(200).json({
+        name: user.name,
+        email: user.email,
+    });
 });
 
 export default authRouter;
