@@ -1,0 +1,221 @@
+🟢 LEVEL 1: BASIC FOUNDATIONS (warm-up but must be perfect)
+
+What is a variable in JavaScript?
+
+Why do we need variables?
+
+How many ways can we declare variables in JavaScript?
+
+Difference between declaring and initializing a variable?
+
+What happens if you use a variable without declaring it?
+
+Can a variable change its data type in JavaScript?
+
+What is the default value of an uninitialized variable?
+
+Is JavaScript statically typed or dynamically typed?
+
+What is an identifier?
+
+Are variable names case-sensitive in JavaScript?
+
+🟡 LEVEL 2: var, let, const (MOST IMPORTANT)
+
+Difference between var, let, and const?
+
+Why was let introduced when var already existed? 
+
+Why is var considered unsafe?
+
+Can let be redeclared in the same scope?
+
+Can const be reassigned?
+
+Why must const be initialized at declaration?
+ans:Because const creates an immutable binding,
+and JavaScript does not allow an immutable binding to exist without an initial value.
+
+Can we change the value of a const object?
+
+What exactly is immutable in const?
+
+Can var be used inside a block?
+
+Why do modern JS projects avoid var?
+
+🟠 LEVEL 3: SCOPE (very frequently asked)
+
+What is scope in JavaScript?
+
+Types of scope in JavaScript?
+
+What is block scope?
+
+What is function scope?
+
+Is var block-scoped or function-scoped?
+
+Is let block-scoped?
+
+What happens to a variable when its scope ends?
+
+Can two variables with same name exist in different scopes?
+
+What is global scope pollution?
+
+How do let and const help avoid scope-related bugs?
+
+🔴 LEVEL 4: HOISTING & TDZ (SENIOR FAVOURITE)
+
+What is hoisting?
+
+Are variables hoisted in JavaScript?
+
+Is var hoisted? If yes, how?
+
+Is let hoisted?
+
+What is Temporal Dead Zone (TDZ)?
+
+Why does accessing let before declaration throw an error?
+
+Difference between hoisting of var and let?
+
+Why doesn’t const behave like var during hoisting?
+
+Does hoisting move code physically?
+
+How does TDZ help prevent bugs?
+
+🧠 LEVEL 5: BINDING (ADVANCED / SENIOR LEVEL)
+
+What is meant by “binding” in JavaScript?
+
+Difference between variable as a container vs binding?
+
+What is mutable binding?
+
+What is immutable binding?
+
+Does let create mutable or immutable bindings?
+
+Does const create mutable or immutable bindings?
+
+Why can const objects be modified?
+
+Why does reassigning a const variable throw an error?
+
+How are bindings related to scope?
+
+How are bindings represented in the ECMAScript specification?
+
+🔥 LEVEL 6: VARIABLES + MEMORY (VERY IMPORTANT)
+
+How are primitive values stored in memory?
+
+How are objects stored in memory?
+
+What does a variable store for an object?
+
+What happens in memory when you reassign a variable?
+
+Difference between copying a primitive vs copying an object?
+
+Why do objects behave differently from primitives?
+
+What is pass-by-value vs pass-by-reference (JS version)?
+
+How does memory relate to bindings?
+
+What happens when a variable is set to null?
+
+How does garbage collection relate to variables?
+
+🔥 LEVEL 7: VARIABLES + CLOSURES (ADVANCED)
+
+Why do variables inside closures not get destroyed?
+
+Does a closure store values or bindings?
+
+How does closure keep access to outer variables?
+
+What happens to variables after a function returns?
+
+Can closures cause memory leaks?
+
+How does block scope affect closures?
+
+Difference between closure with var vs let?
+
+Why does let fix loop-related closure bugs?
+
+How do closures use lexical scope?
+
+Real-world use case of closures with variables?
+
+🧨 LEVEL 8: TRICK & CONFUSION QUESTIONS (INTERVIEW TRAPS)
+
+Why does typeof null return "object"?
+
+Difference between null and undefined?
+
+When should you use null instead of undefined?
+
+Can a variable be both null and undefined?
+
+What happens if you delete a variable?
+
+Can you delete a let or const variable?
+
+What happens if you shadow a variable?
+
+What is variable shadowing?
+
+Is shadowing bad practice?
+
+Difference between shadowing and redeclaration?
+
+🔥 LEVEL 9: REAL INTERVIEW OUTPUT QUESTIONS (NO EXECUTION)
+
+Predict output with var inside loop.
+
+Predict output with let inside loop.
+
+Output of accessing variable before declaration.
+
+Output of modifying const array.
+
+Output of reassigning const object.
+
+Output involving global vs local variable.
+
+Output involving closure + variable.
+
+Output involving TDZ.
+
+Output involving shadowed variable.
+
+Output involving function scope vs block scope.
+
+🧠 LEVEL 10: DESIGN & BEST PRACTICES (SENIOR THINKING)
+
+Why should we use const by default?
+
+When should let be preferred over const?
+
+Why is minimizing variable scope important?
+
+How do variables affect maintainability?
+
+How do variables affect readability?
+
+How do variables affect debugging?
+
+How do variables affect performance?
+
+What are common variable-related bugs?
+
+How do linters enforce good variable practices?
+
+How would you explain variables to a junior developer?
