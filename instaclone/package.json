@@ -5,18 +5,30 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "nodemon server.js"
+		"dev": "npm run lint && nodemon server.js",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
 	},
 	"type": "module",
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"bcryptjs": "^3.0.3",
 		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.6",
 		"dotenv": "^17.3.1",
 		"express": "^5.2.1",
 		"jsonwebtoken": "^9.0.3",
 		"mongoose": "^9.2.1"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.3",
+		"eslint": "^9.39.3",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-n": "^17.24.0",
+		"globals": "^17.3.0",
+		"nodemon": "^3.1.14"
 	}
 }
+
