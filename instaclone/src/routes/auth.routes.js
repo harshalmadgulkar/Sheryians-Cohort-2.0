@@ -8,6 +8,18 @@ const authRouter = express.Router();
 authRouter.post('/register', async (req, res) => {
     const { email, username, password, bio, profileImage } = req.body;
 
+    const missingFields = [];
+
+    if (!email) missingFields.push("email");
+    if (!username) missingFields.push("username");
+    if (!password) missingFields.push("password");
+
+    if (missingFields.length > 0) {
+        return res.status(400).json({
+            message: `Missing required field(s): ${missingFields.join(", ")}`
+        });
+    }
+
     const alreadyExists = await userModel.findOne({
         $or: [
             { username },
@@ -39,7 +51,7 @@ authRouter.post('/register', async (req, res) => {
     res.cookie("instatoken", token);
 
     res.status(201).json({
-        message: "User created successfully",
+        message: "User Registered Successfully",
         user: {
             username: user.username,
             email: user.email,
@@ -47,7 +59,60 @@ authRouter.post('/register', async (req, res) => {
             profileImage: user.profileImage
         }
     });
+});
 
+authRouter.post('/login', async (req, res) => {
+    const { email, username, password } = req.body;
+
+    const missingFields = [];
+
+    if (!password) missingFields.push("password");
+    if (!email && !username) missingFields.push("email or username");
+
+    if (missingFields.length > 0) {
+        return res.status(400).json({
+            message: `Missing required field(s): ${missingFields.join(", ")}`
+        });
+    }
+
+    const user = await userModel.findOne({
+        $or: [{ username }, { email }]
+    });
+
+
+    if (!user) {
+        return res.status(404).json({
+            message: "User Not Found"
+        });
+    }
+
+    const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+
+    const isPasswordValid = hashedPassword === user.password;
+
+    if (!isPasswordValid) {
+        return res.status(401).json({
+            message: "Password invalid"
+        });
+    }
+
+    const token = jwt.sign(
+        { id: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+    );
+
+    res.cookie("instatoken", token);
+    res.status(200).json({
+        message: "User LoggedIn Successfully",
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            bio: user.bio,
+            profileImage: user.profileImage,
+        }
+    });
 });
 
 export default authRouter;
