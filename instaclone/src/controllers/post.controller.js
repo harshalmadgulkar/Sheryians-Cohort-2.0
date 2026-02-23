@@ -1,5 +1,4 @@
 import ImageKit, { toFile } from "@imagekit/nodejs";
-import jwt from "jsonwebtoken";
 import postModel from "../model/post.model.js";
 
 const imageKit = new ImageKit({
@@ -7,22 +6,7 @@ const imageKit = new ImageKit({
 });
 
 export const createPostController = async (req, res) => {
-    const token = req.cookies.instatoken;
-
-    if (!token) {
-        return res.status(401).json({
-            message: "Token not provided. Unauthorized access"
-        });
-    }
-
-    let decoded = null;
-    try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (error) {
-        return res.status(401).json({
-            message: "User Not Authorized"
-        });
-    }
+    const userId = req.user.id;
 
     const file = await imageKit.files.upload({
         file: await toFile(Buffer.from(req.file.buffer), 'file'),
@@ -33,7 +17,7 @@ export const createPostController = async (req, res) => {
     const post = await postModel.create({
         caption: req.body.caption,
         imgUrl: file.url,
-        user: decoded.id
+        user: userId
     });
 
     res.status(201).json({
@@ -43,25 +27,9 @@ export const createPostController = async (req, res) => {
 };
 
 export const getPostController = async (req, res) => {
-    const token = req.cookies.instatoken;
-
-    if (!token) {
-        return res.status(401).json({
-            message: "Token not provided. Unauthorized access"
-        });
-    }
-
-    let decoded;
-    try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (error) {
-        return res.status(401).json({
-            message: "User Not Authorized"
-        });
-    }
-
+    const userId = req.user.id;
     const userPosts = await postModel
-        .find({ user: decoded.id })
+        .find({ user: userId })
         .lean();
 
     res.status(200).json({
@@ -71,28 +39,10 @@ export const getPostController = async (req, res) => {
 };
 
 export const getPostDetailsController = async (req, res) => {
-    const token = req.cookies.instatoken;
-    if (!token) {
-        return res.status(401).json({
-            message: "Unauthorized Access"
-        });
-    }
-
-    let decoded;
-    try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (error) {
-        return res.status(401).json({
-            message: "User Not Authorized"
-        });
-    }
-    const userId = decoded.id;
-    console.log(userId);
+    const userId = req.user.id;
     const postId = req.params.postId;
-    console.log(postId);
 
     const post = await postModel.findOne({ user: userId, _id: postId }).lean();
-    console.log(post);
 
     if (!post) {
         return res.status(400).json({
