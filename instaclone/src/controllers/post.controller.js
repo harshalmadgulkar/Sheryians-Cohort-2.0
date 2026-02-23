@@ -69,3 +69,39 @@ export const getPostController = async (req, res) => {
         userPosts
     });
 };
+
+export const getPostDetailsController = async (req, res) => {
+    const token = req.cookies.instatoken;
+    if (!token) {
+        return res.status(401).json({
+            message: "Unauthorized Access"
+        });
+    }
+
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+        return res.status(401).json({
+            message: "User Not Authorized"
+        });
+    }
+    const userId = decoded.id;
+    console.log(userId);
+    const postId = req.params.postId;
+    console.log(postId);
+
+    const post = await postModel.findOne({ user: userId, _id: postId }).lean();
+    console.log(post);
+
+    if (!post) {
+        return res.status(400).json({
+            message: "Post Not Found"
+        });
+    }
+
+    res.status(200).json({
+        message: "Post Fetched Succesfully",
+        post
+    });
+};

@@ -1,5 +1,5 @@
 import express from "express";
-import { createPostController, getPostController } from "../controllers/post.controller.js";
+import { createPostController, getPostController, getPostDetailsController } from "../controllers/post.controller.js";
 import multer from "multer";
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -8,6 +8,8 @@ const postRouter = express.Router();
 
 postRouter.post("/", upload.single('image'), createPostController);
 postRouter.get("/", getPostController);
+// /api/posts/details/:postId
+postRouter.get("/details/:postId", getPostDetailsController);
 
 
 export default postRouter;
