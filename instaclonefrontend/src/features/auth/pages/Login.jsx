@@ -46,7 +46,7 @@ const Login = () => {
                         placeholder='Enter Password'
                     />
                     <button
-                        className='p-2 bg-red-600 text-white rounded-2xl cursor-pointer'
+                        className='p-2 bg-red-600 text-white rounded-2xl cursor-pointer active:scale-90'
                         type="submit"
                     >
                         Login
