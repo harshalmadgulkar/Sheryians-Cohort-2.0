@@ -15,8 +15,6 @@ feat(dsa): bootstrap DSA practice section with 100+ JS questions and Node starte
 * Add Question Sheet.pdf – formatted version with additional math, conditionals, loops, nested loops, arrays, strings, advanced math, binary search, linked lists, trees, etc.
 * Sets foundation for upcoming DSA + JavaScript algorithm practice lectures
 
-
-
 \`# JavaScript Questions
 
 ## Basic console usage
